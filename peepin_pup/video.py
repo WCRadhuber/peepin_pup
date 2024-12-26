@@ -7,7 +7,9 @@ from picamera2.encoders import JpegEncoder
 from picamera2.outputs import FileOutput
 bp = Blueprint('video', __name__)
 
-
+picam2 = Picamera2()
+camera_config = picam2.create_preview_configuration()
+picam2.configure(camera_config)
 
 class StreamingOutput(io.BufferedIOBase):
     def __init__(self):
