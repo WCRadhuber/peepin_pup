@@ -22,18 +22,9 @@ class StreamingOutput(io.BufferedIOBase):
         self.condition = Condition()
 
     def write(self, buf):
-        try:
-            if buf.startswith(b'\xff\xd8'):
-                # New frame, copy the existing buffer's content
-                self.buffer.truncate()
-                with self.condition:
-                    self.frame = self.buffer.getvalue()
-                    self.condition.notify_all()
-                self.buffer.seek(0)
-            return self.buffer.write(buf)
-        except Exception as e:
-            logger.error(f"Error writing frame: {e}")
-            return 0
+        with self.condition:
+            self.frame = buf
+            self.condition.notify_all()
 
 def gen_frames(output):
     """Generator function for streaming video frames."""
