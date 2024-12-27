@@ -1,7 +1,7 @@
 import io
 import logging
 from threading import Condition
-from flask import Blueprint, render_template, Response
+from flask import Blueprint, render_template, stream_template, Response
 from peepin_pup.auth import login_required
 from picamera2 import Picamera2
 from picamera2.encoders import JpegEncoder
@@ -60,10 +60,10 @@ def video_feed():
         return Response(gen_frames(output),
                        mimetype='multipart/x-mixed-replace; boundary=frame')
     except Exception as e:
-        logger.error(f"Error starting video feed {stir(e)}")
+        logger.error(f"Error starting video feed {str(e)}")
         return Response("Error starting video feed", status=500)
 
 @bp.route('/')
 @login_required
 def index():
-    return render_template('video/index.html')
+    return stream_template('video/index.html')
