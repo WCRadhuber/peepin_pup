@@ -62,9 +62,6 @@ def video_feed():
     except Exception as e:
         logger.error(f"Error starting video feed {stir(e)}")
         return Response("Error starting video feed", status=500)
-    finally:
-        logger.info("Stopping video feed")
-        picam2.stop_recording()
 
 @bp.route('/')
 @login_required
