@@ -1,7 +1,7 @@
 import io
 import logging
 from threading import Condition
-from flask import Blueprint, render_template, stream_template, Response
+from flask import Blueprint, render_template, stream_template, Response, session
 from peepin_pup.auth import login_required
 from picamera2 import Picamera2
 from picamera2.encoders import JpegEncoder
@@ -44,10 +44,11 @@ def gen_frames(output):
 @bp.route('/feed')
 @login_required
 def video_feed():
+    username = session.get("username")
     output = StreamingOutput()
     try:
         picam2.start_recording(JpegEncoder(), FileOutput(output))
-        logger.info("Started video feed")
+        logger.info(f"{username} Started video feed")
         return Response(gen_frames(output),
                        mimetype='multipart/x-mixed-replace; boundary=frame')
     except Exception as e:
