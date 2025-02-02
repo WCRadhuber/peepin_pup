@@ -39,7 +39,7 @@ def gen_frames(output):
             yield (b'--frame\r\n'
                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
     except Exception as e:
-        print(f"Error in frame generation: {str(e)}")
+        logger.error(f"Error in frame generation: {str(e)}")
 
 @bp.route('/feed')
 @login_required
