@@ -10,8 +10,8 @@ Step 4: pip install -r requirements (now is a good time to ensure libcam is prop
 
 Step 5: Edit auth.py and __init__.py secrets.
 
-Step 6: Run flask --app peepin_pup init-db to initalize database instance
+Step 6: Run - flask --app peepin_pup init-db to initalize database instance
 
-Step 7: Run waitress-serve --call "peepin_pup:create_app"
+Step 7: Run - waitress-serve --call "peepin_pup:create_app"
 
 Step 8: This will serve the application on port 8080
