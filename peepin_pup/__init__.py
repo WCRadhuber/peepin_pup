@@ -5,7 +5,7 @@ def create_app(test_config=None):
     #creating and configuring app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-            SECRET_KEY='xH1sCC@Cua*H^Z&d#27%gebKHv8nmEWS',
+            SECRET_KEY='Change me',
             DATABASE=os.path.join(app.instance_path, 'peepin_pup.sqlite'),
     )
 
