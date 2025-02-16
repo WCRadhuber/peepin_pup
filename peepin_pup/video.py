@@ -42,3 +42,15 @@ def gen_frames(output):
 def video_feed():
     username = session.get("username")
     output = StreamingOutput()
+    try:
+        picam2.start_recording(MJPEGEncoder(), FileOutput(output))
+        logger.info(f"{username} Started video feed")
+        return Response(gen_frames(output),
+                       mimetype='multipart/x-mixed-replace; boundary=frame')
+    except Exception as e:
+        logger.error(f"Error starting video feed {str(e)}")
+        return Response("Error starting video feed", status=500)
+@bp.route('/')
+@login_required
+def index():
+    return stream_template('video/index.html')
