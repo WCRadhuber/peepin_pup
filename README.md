@@ -6,7 +6,7 @@ Step 2: create a virtual environment in peepin_pup directory using python3 -m ve
 
 Step 3: Activate virtual environment
 
-Step 4: pip install flask and waitress
+Step 4: pip install -r requirements
  
 Step 5: Edit auth.py and __init__.py secrets.
 
