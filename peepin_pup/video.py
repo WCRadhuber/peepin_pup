@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint, stream_template, session, Response, stream_with_context
 import requests
 from peepin_pup.auth import login_required
@@ -9,8 +10,9 @@ def proxy_stream(camera_id):
     
     #Integrate with camera streams. Will move these values in a config or database later.
     camera_streams = {
-        1: 'http://192.168.0.182:8000/stream.mjpg',
-        2: 'http://192.168.0.113:8000/stream.mjpg'
+        1: os.environ.get('STREAM_1'),
+        2: os.environ.get('STREAM_2'),
+        3: os.environ.get('STREAM_3')
     }
 
     stream_url = camera_streams.get(camera_id)
