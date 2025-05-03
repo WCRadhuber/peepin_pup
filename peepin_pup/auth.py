@@ -1,10 +1,10 @@
 import os
 import functools
-from flask import( Blueprint, flash, g, redirect, render_template, request, session, url_for
-    )
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from peepin_pup.db import get_db, query_db, insert_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -33,6 +33,7 @@ def register():
         flash(error)
     return render_template('auth/register.html')
 
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -54,8 +55,9 @@ def login():
             return redirect(url_for('index'))
 
         flash(error)
-    
+
     return render_template('auth/login.html')
+
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -65,13 +67,15 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = query_db(
-                'SELECT * FROM user_id WHERE id = %s', (user_id,), one=True
+            'SELECT * FROM user_id WHERE id = %s', (user_id,), one=True
         )
+
 
 @bp.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 
 def login_required(view):
     @functools.wraps(view)
