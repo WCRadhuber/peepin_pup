@@ -1,14 +1,14 @@
 import os
-from flask import Blueprint, stream_template, session, Response, stream_with_context
+from flask import Blueprint, stream_template, Response, stream_with_context
 import requests
 from peepin_pup.auth import login_required
 bp = Blueprint('video', __name__)
 
+
 @bp.route('/stream/<int:camera_id>')
 @login_required
 def proxy_stream(camera_id):
-    
-    #Integrate with camera streams. Will move these values in a config or database later.
+
     camera_streams = {
         1: os.environ.get('STREAM_1'),
         2: os.environ.get('STREAM_2'),
@@ -30,6 +30,7 @@ def proxy_stream(camera_id):
                     yield chunk
 
     return Response(stream_with_context(generate()), mimetype='multipart/x-mixed-replace; boundary=FRAME')
+
 
 @bp.route('/')
 @login_required
