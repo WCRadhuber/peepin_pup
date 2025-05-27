@@ -11,13 +11,6 @@ def get_db():
     return g.db
 
 
-def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
-
-
 def query_db(query, args=(), one=False):
     db = get_db()
     cur = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
