@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<img src="{{ url_for('video.proxy_stream', camera_id=1) }}" width="640" height="480" />
-<img src="{{ url_for('video.proxy_stream', camera_id=2) }}" width="640" height="480" />
-<img src="{{ url_for('video.proxy_stream', camera_id=3) }}" width="640" height="480" />
+{% for camera_id in camera_ids %}
+	<img src="{{ url_for('video.proxy_stream', camera_id=camera_id) }}" width="640" height="480" />
+{% endfor %}
 {% endblock %}

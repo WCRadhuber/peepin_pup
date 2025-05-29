@@ -1,0 +1,4 @@
+SECRET=s3cr3tpass
+SECRET_KEY=secretpass
+DATABASE=postgresql://user:pass@ip:port/user
+STREAMS= {1: 'http://192.168.0.100:8000/stream.mjpg', 2: 'http://192.168.0.101:8000/stream.mjpg', 3: 'http://192.168.0.103:8000/stream.mjpg'}

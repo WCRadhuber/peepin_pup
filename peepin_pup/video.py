@@ -4,16 +4,12 @@ import requests
 from peepin_pup.auth import login_required
 bp = Blueprint('video', __name__)
 
+camera_streams = eval(os.environ.get('STREAMS'))
+
 
 @bp.route('/stream/<int:camera_id>')
 @login_required
 def proxy_stream(camera_id):
-
-    camera_streams = {
-        1: os.environ.get('STREAM_1'),
-        2: os.environ.get('STREAM_2'),
-        3: os.environ.get('STREAM_3')
-    }
 
     stream_url = camera_streams.get(camera_id)
 
@@ -35,4 +31,4 @@ def proxy_stream(camera_id):
 @bp.route('/')
 @login_required
 def index():
-    return stream_template('video/index.html')
+    return stream_template('video/index.html', camera_ids=camera_streams.keys())
