@@ -2,12 +2,12 @@ Dog Nanny Cam utilizing flask UI. This has a has an authentication process so yo
 
 Requirements: Docker, Docker-Compose, Postgres.
 
-STEP 1: Create a .env file with the following parameters and configure accordingly.
+STEP 1: Change .example_env to .env  and adjust the sample parameters provided. (Providing picamera server code in seperate repo soon)
 
 SECRET <- Secret for registration
 SECRET_KEY <- Flask Secret Key
 DATABASE <- Database URI
-STREAM_#  <- Streaming API URL. Need to modify video.py camera_streams dictionary dependent on number of streams.
+STREAMS  <- Pass in streaming API URLs as a dictionary with integer key values.
 
 Step 2: Run schema.sql on your POSTGRES db.
 
